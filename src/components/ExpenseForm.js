@@ -3,17 +3,19 @@ import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-const now = moment();
-
 export default class ExpenseForm extends React.Component {
-  state = {
-    description: '',
-    amount: '',
-    note:'',
-    createAt: moment(),
-    calendarFocused: false,
-    error: ''
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      description: props.expense ? props.expense.description : '',
+      note: props.expense ? props.expense.note : '',
+      amount: props.expense ? (props.expense.amount / 100).toString() : '',
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      calendarFocused: false,
+      error: ''
+    };
+  }
   onDescriptionChange = (e) => {
     const description = e.target.value;
     this.setState(() => ({ description }));
@@ -28,9 +30,9 @@ export default class ExpenseForm extends React.Component {
     const note = e.target.value;
     this.setState(() => ({ note }));
   };
-  onDateChange = (createAt) => {
-    if (createAt) {
-      this.setState(() => ({ createAt }))
+  onDateChange = (createdAt) => {
+    if (createdAt) {
+      this.setState(() => ({ createdAt }))
     }    
   };
   onFocusChange = ({ focused }) => {
@@ -46,7 +48,7 @@ export default class ExpenseForm extends React.Component {
       this.props.onSubmit({
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
-        createAt: this.state.createAt.valueOf(),
+        createdAt: this.state.createdAt.valueOf(),
         note: this.state.note
       });
     }
@@ -70,7 +72,7 @@ export default class ExpenseForm extends React.Component {
             onChange={this.onAmountChange}
           />
           <SingleDatePicker 
-            date={this.state.createAt}
+            date={this.state.createdAt}
             onDateChange={this.onDateChange}
             focused={this.state.calendarFocused}
             onFocusChange={this.onFocusChange}

@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const TargetUrl = () => window.location.replace('http://google.com/')
-
 const Header = () => (
   <header>
     <h1>Expensify</h1>
@@ -10,7 +8,6 @@ const Header = () => (
     <NavLink to="/create" activeClassName="is-active">Create Expense </NavLink>
     <NavLink to="/edit" activeClassName="is-active">Edit Expense </NavLink>
     <NavLink to="/help" activeClassName="is-active">Help </NavLink>
-    <NavLink to="/" onClick={ TargetUrl } >Target URL </NavLink>
   </header>
 );
 
