@@ -1,5 +1,7 @@
 # NodeJS Modules
 node_modules/
 public/dist/
+.env.test
+.env.development
 
 bookmark.txt
