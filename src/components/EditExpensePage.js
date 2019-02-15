@@ -13,6 +13,7 @@ export class EditExpensePage extends React.Component {
     this.props.history.push('/');
   };
   render() {
+    console.log(this.props);
     return (
       <div>
         <ExpenseForm
